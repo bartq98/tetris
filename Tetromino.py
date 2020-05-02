@@ -1,3 +1,6 @@
+from config import *
+import pygame
+
 class Tetromino:
 
 	# top left corner coons. of 4x4 falling buffer
@@ -89,3 +92,17 @@ class Tetromino:
 					rotated_array[i][j] = bufor[3-j][i] #12+i - (j*4)
 
 			return rotated_array
+
+	
+	def draw_bufor(self, screen):
+		"""Draw 4 x 4 bufor with currently falling tetromino"""
+		
+		# Calculate position of drawing
+		rect_bufor_x = (self.current_x * block_size) + game_board_coons["left"]
+		rect_bufor_y = (self.current_y * block_size) + game_board_coons["top"]
+	
+		for i, row in enumerate(self.buffer):
+			for j, elem in enumerate(row):
+				if elem == 1:
+					pygame.draw.rect(screen, colors["lightblue"], \
+					(rect_bufor_x+(j*block_size), rect_bufor_y+(i*block_size), block_size, block_size))

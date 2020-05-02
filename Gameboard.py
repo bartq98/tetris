@@ -1,4 +1,5 @@
 from config import *
+import pygame
 
 class Gameboard:
 	
@@ -26,3 +27,12 @@ class Gameboard:
 					print(elem, end=",")
 				print("")
 			print("----------------")
+
+
+	def draw_gameboard(self, screen, board, color):
+		"""Drawing gameboard"""
+		for i, row in enumerate(board):
+			for j, elem in enumerate(row):
+				if elem == 1:
+					pygame.draw.rect(screen, color, (game_board_coons["left"] + j * block_size, \
+					game_board_coons["top"] + i * block_size, block_size, block_size))

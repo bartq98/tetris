@@ -1,5 +1,5 @@
 #!/bin/python3.8
-
+import pygame
 # This file provides constans of game (windows size, colos within game etc.)
 # You can simply set up to your own preference
 
@@ -34,3 +34,7 @@ game_board_coons = {
     "left" : board_with_border_coons["left"] + block_size,
     "top"  : board_with_border_coons["top"]
 }
+
+def pre_configure_window():
+    """Configure whole stuff around game"""
+    pygame.display.set_caption("Tetris")

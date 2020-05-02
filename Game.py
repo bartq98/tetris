@@ -5,54 +5,7 @@ import time
 import pygame
 from config import *
 
-def move(current_left, current_top):
-    """Provides moving, rotating and speed up falling down
-    of current bufor"""
-    events = pygame.event.get()
-    for event in events:
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                return current_left + (-1), current_top
-            if event.key == pygame.K_RIGHT:
-                return current_left + 1, current_top
-            if event.key == pygame.K_DOWN:
-                return current_left, current_top+1
-    return current_left
 
-def set_gameboard():
-    """Setting -1 to left, bottom and right lines to detect collision
-    with bufor and boundaries of board."""
-    
-
-    
-
-    for i in range(BOARD_COLUMNS):
-        gameboard[BOARD_ROWS-1][i] = -1
-
-    for i, row in enumerate(gameboard):
-        for j, elem in enumerate(row):
-            print(gameboard[i][j], end=" ")
-    print("")
-
-
-
-
-
-
-def rotate_buffor(bufor):
-    """Roates bufor clockwise"""
-    new_array = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]
-
-    for i in range(0, 4):
-        for j in range(0, 4):
-            new_array[i][j] = bufor[3-j][i] #12+i - (j*4)
-
-    return new_array
 
 def debug_board(buf):
     """Used in console to check if everythings is drawing fine"""

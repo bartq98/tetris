@@ -22,12 +22,9 @@ def move(current_left, current_top):
 def set_gameboard():
     """Setting -1 to left, bottom and right lines to detect collision
     with bufor and boundaries of board."""
-    gameboard = [[0 for i in range(0, BOARD_COLUMNS)] for j in range(0, BOARD_ROWS)]
+    
 
-    for i in range(0, BOARD_ROWS-1):
-        for j in range(0, BOARD_COLUMNS):
-            if j in (0, BOARD_COLUMNS-1):
-                gameboard[i][j] = -1
+    
 
     for i in range(BOARD_COLUMNS):
         gameboard[BOARD_ROWS-1][i] = -1
@@ -59,11 +56,7 @@ def rotate_buffor(bufor):
 
 def debug_board(buf):
     """Used in console to check if everythings is drawing fine"""
-    for row in buf:
-        for elem in row:
-            print(elem, end=",")
-        print("")
-    print("----------------")
+    
 
 
 def draw_gameboard(screen, board, color):

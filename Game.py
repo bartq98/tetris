@@ -19,53 +19,6 @@ def move(current_left, current_top):
                 return current_left, current_top+1
     return current_left
 
-
-TETROMINOS = [
-    [
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 1, 1, 0],
-        [0, 0, 1, 1],
-        [0, 0, 0, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 1, 1, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 1, 1],
-        [0, 0, 0, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 0, 0, 1],
-        [0, 1, 1, 1],
-        [0, 0, 0, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 0, 1, 0],
-        [0, 1, 1, 1],
-        [0, 0, 0, 0]
-    ],
-    [
-        [0, 0, 0, 0],
-        [0, 1, 1, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0]
-    ],
-]
-
-
 def set_gameboard():
     """Setting -1 to left, bottom and right lines to detect collision
     with bufor and boundaries of board."""

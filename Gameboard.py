@@ -5,9 +5,13 @@ class Gameboard:
 	
 	fields = [[]]
 
+	def __init__(self):
+		initialize_board()
+
+
 	def initialize_board(self):
 		# When start all fields are set to 0 (except boundaries set which are set to -1)
-		fields = [[0 for i in range(0, BOARD_COLUMNS)] for j in range(0, BOARD_ROWS)]
+		self.fields = [[0 for i in range(0, BOARD_COLUMNS)] for j in range(0, BOARD_ROWS)]
 		# Setting bounds to -1
 		for i in range(0, BOARD_ROWS-1):
 			for j in range(0, BOARD_COLUMNS):

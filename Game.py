@@ -23,7 +23,7 @@ def game():
 
 
 	game_over = False
-	game_single_frame = 0.5
+	game_single_frame = 0.05
 	time_steps_done_before_fall = 0
 	time_steps_to_fall_bufor = 20
 
@@ -39,13 +39,10 @@ def game():
 
 		bufor.draw_bufor(screen)
 
-		time_steps_done_before_fall = time_steps_done_before_fall + 1
+		time_steps_done_before_fall += 1
 		if time_steps_done_before_fall == time_steps_to_fall_bufor:
-			bufor_top = bufor_top + 1
+			bufor.fall_down()
 			time_steps_done_before_fall = 0
-
-		#draw_gameboard(screen, gameboard, colors["lightblue"])
-
 
 		pygame.display.update()
 

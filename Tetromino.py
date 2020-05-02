@@ -94,9 +94,22 @@ class Tetromino:
 			return rotated_array
 
 	
+	def fall_down(self):
+		print("Before:", self.current_y)
+		self.current_y += 1
+		print("After:", self.current_y)
+
+	def debug_x_y(self):
+		print("Current coons. of buffer are [",self.current_y,"][", \
+			self.current_x,"]", sep="")
+
+
+
 	def draw_bufor(self, screen):
 		"""Draw 4 x 4 bufor with currently falling tetromino"""
 		
+		self.debug_x_y()
+
 		# Calculate position of drawing
 		rect_bufor_x = (self.current_x * block_size) + game_board_coons["left"]
 		rect_bufor_y = (self.current_y * block_size) + game_board_coons["top"]

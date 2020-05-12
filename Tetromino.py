@@ -95,6 +95,7 @@ class Tetromino:
 
 	
 	def fall_down(self):
+		"""Moves buffer one block down"""
 		print("Before:", self.current_y)
 		self.current_y += 1
 		print("After:", self.current_y)

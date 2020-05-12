@@ -78,20 +78,20 @@ class Tetromino:
 				[1, 0, 0, 1]
 			],
 
-		def rotate_buffor(bufor):
-			"""Roates bufor clockwise"""
-			rotated_array = [
-				[0, 0, 0, 0],
-				[0, 0, 0, 0],
-				[0, 0, 0, 0],
-				[0, 0, 0, 0]
-			]
 
-			for i in range(0, 4):
-				for j in range(0, 4):
-					rotated_array[i][j] = bufor[3-j][i] #12+i - (j*4)
+	def rotate_buffor(self, bufor):
+		"""Roates bufor clockwise"""
+		rotated_array = [
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0]
+		]
 
-			return rotated_array
+		for i in range(0, 4):
+			for j in range(0, 4):
+				rotated_array[i][j] = bufor[3-j][i] #12+i - (j*4)
+		return rotated_array
 
 	
 	def fall_down(self):

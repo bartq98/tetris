@@ -25,17 +25,23 @@ def game():
 	game_over = False
 	game_single_frame = 0.05
 	time_steps_done_before_fall = 0
-	time_steps_to_fall_bufor = 20
+	time_steps_to_fall_bufor = 10
 
-	bufor = Tetromino.Tetromino("Z", 0, 0)
+	bufor = Tetromino.Tetromino("L", 0, 0)
 
 	while not game_over:
-		pygame.draw.rect(screen, colors["red"], (
-			game_board_coons["left"], game_board_coons["top"], \
-			board_width - 2 * block_size, board_height - block_size))
+		
+		pygame.draw.rect(
+			screen, 
+			colors["red"], 
+				(game_board_coons["left"], 
+				 game_board_coons["top"],
+				 board_width - 2 * block_size,
+				 board_height - block_size)
+		)
 
 		time.sleep(game_single_frame) # sleeps for every 50 miliseconds
-	
+		bufor.move()
 
 		bufor.draw_bufor(screen)
 
@@ -49,4 +55,4 @@ def game():
 
 
 game()
-print(block_size)
+# print(block_size)

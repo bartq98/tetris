@@ -19,6 +19,7 @@ class Tetromino:
 		self.current_x = x
 		self.current_y = y
 
+		# capital letters refers to shape of tetromino
 		if type == "I":
 			self.buffer = [
 				[0, 0, 1, 0],

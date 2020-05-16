@@ -141,9 +141,9 @@ class Tetromino:
 			for j, elem in enumerate(row):
 				if board[x_after_move+i][y_after_move+j] and \
 					board[x_after_move+i][y_after_move+j] == buffer_after_move[i][j]:
-					return False
+					print("Can move!")
 				else:
-					return True
+					print("Cannot move!")
 
 
 

@@ -97,9 +97,7 @@ class Tetromino:
 	
 	def fall_down(self):
 		"""Moves buffer one block down"""
-		# print("Before:", self.current_y)
 		self.current_y += 1
-		# print("After:", self.current_y)
 
 	def debug_x_y(self):
 		print("Current coons. of buffer are [",self.current_y,"][", \
@@ -115,7 +113,6 @@ class Tetromino:
 				if event.key == pygame.K_LEFT:
 					self.current_x -= 1
 				if event.key == pygame.K_RIGHT:
-					# detect_collision(board)
 					self.current_x += 1
 				if event.key == pygame.K_DOWN:
 					self.current_y += 1

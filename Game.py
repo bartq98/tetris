@@ -23,11 +23,15 @@ def game():
 
 
 	game_over = False
-	game_single_frame = 0.05
+	game_single_frame = 0.02
 	time_steps_done_before_fall = 0
-	time_steps_to_fall_bufor = 10
+	time_steps_to_fall_bufor = 30
 
 	bufor = Tetromino.Tetromino("L", 0, 0)
+	
+	gameboard = Gameboard.Gameboard()
+	gameboard.debug_board(True)
+
 
 	while not game_over:
 		

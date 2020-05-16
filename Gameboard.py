@@ -6,7 +6,7 @@ class Gameboard:
 	fields = [[]]
 
 	def __init__(self):
-		initialize_board()
+		self.initialize_board()
 
 
 	def initialize_board(self):
@@ -16,7 +16,10 @@ class Gameboard:
 		for i in range(0, BOARD_ROWS-1):
 			for j in range(0, BOARD_COLUMNS):
 				if j in (0, BOARD_COLUMNS-1):
-					fields[i][j] = -1
+					self.fields[i][j] = -1
+
+		for i in range(0, BOARD_COLUMNS):
+			self.fields[BOARD_ROWS-1][i] = -1
 
 	def debug_board(self, print_coons):
 		if print_coons:
@@ -40,3 +43,5 @@ class Gameboard:
 				if elem == 1:
 					pygame.draw.rect(screen, color, (game_board_coons["left"] + j * block_size, \
 					game_board_coons["top"] + i * block_size, block_size, block_size))
+
+	

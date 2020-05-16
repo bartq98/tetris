@@ -115,11 +115,35 @@ class Tetromino:
 				if event.key == pygame.K_LEFT:
 					self.current_x -= 1
 				if event.key == pygame.K_RIGHT:
+					# detect_collision(board)
 					self.current_x += 1
 				if event.key == pygame.K_DOWN:
 					self.current_y += 1
 
 
+	def detect_collision(self, board, key_pressed):
+		"""Return True if buffer can move in specified direction, otherwise return False"""
+		directions = [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_DOWN]
+		rotated = pygame.K_UP
+
+		if key_pressed in directions:
+			x_after_move = self.current_x + (1 if key_pressed == directions[0] else -1)
+			y_after_move = self.current_y + (key_pressed == directions[3])
+			buffer_after_move = list.copy(self.buffer)
+		elif key_pressed is rotated:
+			x_after_move = self.current_x
+			y_after_move = self.current_y
+			buffer_after_move = self.rotate_buffor(self.buffer)
+		else:
+			pass #if invalid key was pressed
+
+		for i, row in enumerate(buffer_after_move):
+			for j, elem in enumerate(row):
+				if board[x_after_move+i][y_after_move+j] and \
+					board[x_after_move+i][y_after_move+j] == buffer_after_move[i][j]:
+					return False
+				else:
+					return True
 
 
 

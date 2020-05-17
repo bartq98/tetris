@@ -25,3 +25,12 @@ def set_gameboard():
         for j, elem in enumerate(row):
             print(gameboard[i][j], end=" ")
     print("")
+
+pygame.draw.rect(
+			screen, 
+			colors["red"], 
+				(game_board_coons["left"], 
+				 game_board_coons["top"],
+				 board_width - 2 * block_size,
+				 board_height - block_size)
+		)

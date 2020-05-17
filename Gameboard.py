@@ -51,22 +51,22 @@ class Gameboard:
                         screen,
                         color_empty,
                         (config.GAME_BOARD_COONS["left"] + j * config.BLOCK_SIZE,
-                        config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE,
-                        config.BLOCK_SIZE, config.BLOCK_SIZE)
+                         config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE,
+                         config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )
                 elif board_elem == -1: #for boundaries
                     pygame.draw.rect(
                         screen,
                         color_bound,
                         (config.GAME_BOARD_COONS["left"] + j * config.BLOCK_SIZE,
-                        config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE,
-                        config.BLOCK_SIZE, block_size)
+                         config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE,
+                         config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )
                 elif board_elem == 2: #for falled blocks
                     pygame.draw.rect(
                         screen,
                         color_block,
-                        (config.GAME_BOARD_COONS["left"] + j * config.BLOCK_SIZE, 
-                        config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE, 
-                        config.BLOCK_SIZE, config.BLOCK_SIZE)
+                        (config.GAME_BOARD_COONS["left"] + j * config.BLOCK_SIZE,
+                         config.GAME_BOARD_COONS["top"] + i * config.BLOCK_SIZE,
+                         config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )

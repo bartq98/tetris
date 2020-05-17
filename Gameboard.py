@@ -3,13 +3,11 @@ import config
 
 
 class Gameboard:
+    """Implementing board when tetrominos falls and whole game happend"""
     fields = [[]]
 
     def __init__(self):
         self.initialize_board()
-        self.fields[10][4] = 2
-        self.fields[10][5] = 2
-        self.fields[10][6] = 2
 
     def initialize_board(self):
         # When start all fields are set to 0 (except boundaries set which are set to -1)

@@ -1,5 +1,6 @@
 import pygame
 import config
+import Tetromino
 
 
 class Gameboard:
@@ -68,3 +69,11 @@ class Gameboard:
                          config.GAME_BOARD_COORDS["top"] + i * config.BLOCK_SIZE,
                          config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )
+
+    def add_blocks(self, tetromino):
+        y, x = tetromino.current_y, tetromino.current_x
+        
+        for i, row in enumerate(tetromino.buffer):
+            for j, elem in enumerate(row):
+                if tetromino.buffer[i][j]:
+                    self.fields[y + i][x + j] = 2

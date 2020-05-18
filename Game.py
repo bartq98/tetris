@@ -16,7 +16,7 @@ def game():
     screen.fill(config.COLORS["darkred"])
 
     game_over = False
-    game_single_frame = 0.2
+    game_single_frame = 0.003
     time_steps_done_before_fall = 0
     time_steps_to_fall_bufor = 30
 
@@ -34,7 +34,11 @@ def game():
 
         time_steps_done_before_fall += 1
         if time_steps_done_before_fall == time_steps_to_fall_bufor:
-            bufor.fall_down()
+            has_falled = bufor.fall_down(gameboard)
+            if has_falled:
+                gameboard.add_blocks(bufor)
+                bufor = Tetromino.Tetromino("Z", 0, 0)
+
             time_steps_done_before_fall = 0
 
         pygame.display.update()

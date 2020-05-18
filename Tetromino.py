@@ -95,15 +95,14 @@ class Tetromino:
                 rotated_array[i][j] = bufor[3-j][i] if clockwise else bufor[j][3-i]
         return rotated_array
 
-    def fall_down(self):
+    def fall_down(self, board : Gameboard.Gameboard):
         """Moves buffer one block down"""
         self.current_y += 1
-
-
-    def debug_x_y(self):
-        print("Current coons. of buffer are [", self.current_y,"][", \
-            self.current_x,"]", sep="")
-
+        if self.will_collide(board):
+            self.current_y -= 1
+            return True
+        else:
+            return False
 
     def move(self, board : Gameboard.Gameboard):
         """Moves bufor by pressing keys"""
@@ -135,12 +134,8 @@ class Tetromino:
         """Return True if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
-                print(f"buffer row = {self.current_y} and column = {self.current_x}")
-
-                
                 if self.buffer[j][i] == 1 and board.fields[self.current_y + j][self.current_x + i] in [-1, 2]:
                     return True
-                
         return False
 
 

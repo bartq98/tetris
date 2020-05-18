@@ -5,6 +5,7 @@ import pygame
 import config
 import Tetromino
 import Gameboard
+import random
 
 def game():
     """Runs whole game"""
@@ -16,13 +17,13 @@ def game():
     screen.fill(config.COLORS["darkred"])
 
     game_over = False
-    game_single_frame = 0.003
+    game_single_frame = 0.01
     time_steps_done_before_fall = 0
-    time_steps_to_fall_bufor = 30
+    time_steps_to_fall_bufor = 10
 
     bufor = Tetromino.Tetromino("I", 0, 0)
     gameboard = Gameboard.Gameboard()
-    gameboard.debug_board(True)
+
 
 
     while not game_over:
@@ -37,7 +38,8 @@ def game():
             has_falled = bufor.fall_down(gameboard)
             if has_falled:
                 gameboard.add_blocks(bufor)
-                bufor = Tetromino.Tetromino("Z", 0, 0)
+                bufor = Tetromino.Tetromino(random.choice(("I", "Z", "S")), 4, 0)
+                gameboard.delete_lines()
 
             time_steps_done_before_fall = 0
 

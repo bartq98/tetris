@@ -13,6 +13,7 @@ class Gameboard:
     def initialize_board(self):
         # When start all fields are set to 0 (except boundaries set which are set to -1)
         self.fields = [[0 for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
+
         # Setting bounds to -1
         for i in range(0, config.BOARD_ROWS-1):
             for j in range(0, config.BOARD_COLUMNS):
@@ -22,23 +23,10 @@ class Gameboard:
         for i in range(0, config.BOARD_COLUMNS):
             self.fields[config.BOARD_ROWS-1][i] = -1
 
-    def debug_board(self, print_coons):
-        if print_coons:
-            for i, row in enumerate(self.fields):
-                for j, elem in enumerate(row):
-                    print("[", i, "][", j, "]=", elem, sep="", end=",")
-                print("")
-            print("----------------")
-        else:
-            for row in self.fields:
-                for elem in row:
-                    print(elem, end=",")
-                print("")
-            print("----------------")
-
-
     def draw_gameboard(self, screen):
-        """Drawing gameboard"""
+        """Drawing gameboard within screen"""
+
+        # used colors can be simply changed
         color_bound = config.COLORS["black"]
         color_empty = config.COLORS["red"]
         color_block = config.COLORS["orange"]
@@ -71,9 +59,17 @@ class Gameboard:
                     )
 
     def add_blocks(self, tetromino):
+        """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""
         y, x = tetromino.current_y, tetromino.current_x
         
         for i, row in enumerate(tetromino.buffer):
             for j, elem in enumerate(row):
                 if tetromino.buffer[i][j]:
                     self.fields[y + i][x + j] = 2
+
+    def delete_lines(self):
+        for i, row in enumerate(self.fields[:-1]):
+            if 0 in row[1:len(row)-1]: # in i row is 0, so it isn't empty
+                continue
+            else:
+                print(f"Linia {i} do usunięcia")

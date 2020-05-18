@@ -27,14 +27,14 @@ BOARD_HEIGHT = BLOCK_SIZE * (BOARD_ROWS+2) #with two borders on left and right
 
 
 # For drawing screen, gameboard etc.
-BOARD_WITH_BORDER_COONS = {
+BOARD_WITH_BORDER_COORDS = {
     "left" : (SCREEN_WIDTH / 2 - BOARD_WIDTH / 2),
     "top"  : (SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2),
 }
 
-GAME_BOARD_COONS = {
-    "left" : BOARD_WITH_BORDER_COONS["left"] + BLOCK_SIZE,
-    "top"  : BOARD_WITH_BORDER_COONS["top"]
+GAME_BOARD_COORDS = {
+    "left" : BOARD_WITH_BORDER_COORDS["left"] + BLOCK_SIZE,
+    "top"  : BOARD_WITH_BORDER_COORDS["top"]
 }
 
 def pre_configure_window():

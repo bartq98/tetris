@@ -30,7 +30,7 @@ def game():
         time.sleep(game_single_frame) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
         bufor.move(gameboard)
 
-        bufor.debug_draw_bufor(screen)
+        bufor.draw_bufor(screen)
 
         time_steps_done_before_fall += 1
         if time_steps_done_before_fall == time_steps_to_fall_bufor:

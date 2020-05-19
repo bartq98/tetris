@@ -4,75 +4,19 @@ import pygame
 
 class Tetromino:
 
-    # top left corner coons. of 4x4 falling buffer
-    current_x = 0
-    current_y = 0
-
-    # for holding information of type of currently falling tetromino
-    buffer = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]
-
     def __init__(self, type, x, y):
+        """Initializes falling tetromino."""
+
+        # cooridantes of [0][0] (top left element) of buffor on gameboard
         self.current_x = x
         self.current_y = y
 
-        # capital letters refers to shape of tetromino
-        if type == "I":
-            self.buffer = [
-                [0, 0, 1, 0],
-                [0, 0, 1, 0],
-                [0, 0, 1, 0],
-                [0, 0, 1, 0]
-            ]
-        elif type == "Z":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 1, 1, 0],
-                [0, 0, 1, 1],
-                [0, 0, 0, 0]
-            ]
-        elif type == "S":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 1, 1, 0],
-                [1, 1, 0, 0],
-                [0, 0, 0, 0]
-            ]
-        elif type == "J":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 1, 1, 1],
-                [0, 0, 0, 0]
-            ]
-        elif type == "L":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 0, 0, 1],
-                [0, 1, 1, 1],
-                [0, 0, 0, 0]
-            ]
-        elif type == "T":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 0, 1, 0],
-                [0, 1, 1, 1],
-                [0, 0, 0, 0]
-            ]
-        elif type == "O":
-            self.buffer = [
-                [0, 0, 0, 0],
-                [0, 1, 1, 0],
-                [0, 1, 1, 0],
-                [0, 0, 0, 0]
-            ]
+        # self.buffer is 4x4 array which holds current shape and rotation of tetromino
+        
+        if type in config.TETROMINO_SHAPES.keys():
+            self.buffer = config.TETROMINO_SHAPES[type]
         else:
-            print("Invalid type of Tetromino!")
-            print("Should throw execption!")
+            # to 
             self.buffer = [
                 [1, 0, 0, 1],
                 [0, 0, 0, 0],

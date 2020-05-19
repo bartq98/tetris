@@ -4,7 +4,7 @@ import pygame
 # This file provides constans of game (windows size, colos within game etc.)
 # You can simply set up to your own preference
 
-SCREEN_WIDTH = 1280
+SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 720
 
 # For board where tetrominos fall:
@@ -36,6 +36,54 @@ GAME_BOARD_COORDS = {
     "left" : BOARD_WITH_BORDER_COORDS["left"] + BLOCK_SIZE,
     "top"  : BOARD_WITH_BORDER_COORDS["top"]
 }
+
+TETROMINO_SHAPES = {
+    "I" : [
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+    ],
+    "Z" : [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 1, 1],
+            [0, 0, 0, 0],
+    ],
+    "S" : [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0],
+    ],
+    "J" : [
+            [0, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 1, 1],
+            [0, 0, 0, 0],
+    ],
+    "L" : [
+            [0, 0, 0, 0],
+            [0, 0, 0, 1],
+            [0, 1, 1, 1],
+            [0, 0, 0, 0],
+    ],
+    "T" : [
+            [0, 0, 0, 0],
+            [0, 0, 1, 0],
+            [0, 1, 1, 1],
+            [0, 0, 0, 0],
+    ],
+    "O" : [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+    ],
+}
+
+
+
 
 def pre_configure_window():
     """Configure whole stuff around game"""

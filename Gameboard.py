@@ -81,6 +81,6 @@ class Gameboard:
             for i in range(1, len(row)-1): 
                 self.fields[row_index][i] = 0 # delete row
 
-            for j in range(row_index-1, 0, -1):
-                for k in range(1, len(row)-1):
-                    self.fields[j+1][k] = self.fields[j][k]
+            for j in range(row_index-1, 0, -1): # from bottom to up
+                for k in range(1, len(row)-1): 
+                    self.fields[j+1][k] = self.fields[j][k] # moves all blocks within row one row lower

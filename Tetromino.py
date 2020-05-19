@@ -16,6 +16,7 @@ class Tetromino:
         if type in config.TETROMINO_SHAPES.keys():
             self.buffer = config.TETROMINO_SHAPES[type]
         else:
+            # to 
             self.buffer = [
                 [1, 0, 0, 1],
                 [0, 0, 0, 0],

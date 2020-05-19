@@ -68,8 +68,19 @@ class Gameboard:
                     self.fields[y + i][x + j] = 2
 
     def delete_lines(self):
+        """Check if specified row is empty; if yes deletes it and moves all block down."""
+        rows_to_detele = [] # holds indexes of filled rows
         for i, row in enumerate(self.fields[:-1]):
             if 0 in row[1:len(row)-1]: # in i row is 0, so it isn't empty
                 continue
             else:
-                print(f"Linia {i} do usunięcia")
+                rows_to_detele.append(i)
+
+        
+        for row_index in rows_to_detele:
+            for i in range(1, len(row)-1): 
+                self.fields[row_index][i] = 0 # delete row
+
+            for j in range(row_index-1, 0, -1):
+                for k in range(1, len(row)-1):
+                    self.fields[j+1][k] = self.fields[j][k]

@@ -1,6 +1,6 @@
 import pygame
 import config
-import Tetromino
+import tetromino
 
 
 class Gameboard:

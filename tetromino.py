@@ -1,5 +1,5 @@
 import config
-import Gameboard
+import gameboard
 import pygame
 
 class Tetromino:
@@ -39,7 +39,7 @@ class Tetromino:
                 rotated_array[i][j] = bufor[3-j][i] if clockwise else bufor[j][3-i]
         return rotated_array
 
-    def fall_down(self, board : Gameboard.Gameboard):
+    def fall_down(self, board : gameboard.Gameboard):
         """Moves buffer one block down"""
         self.current_y += 1
         if self.will_collide(board):
@@ -48,7 +48,7 @@ class Tetromino:
         else:
             return False
 
-    def move(self, board : Gameboard.Gameboard):
+    def move(self, board : gameboard.Gameboard):
         """Moves bufor by pressing keys"""
         events = pygame.event.get()
         for event in events:
@@ -74,7 +74,7 @@ class Tetromino:
                         print("Kolidują!")
                         self.current_y -= 1
 
-    def will_collide(self, board : Gameboard):
+    def will_collide(self, board : gameboard):
         """Return True if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):

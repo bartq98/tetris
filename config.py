@@ -86,11 +86,3 @@ TETROMINO_SHAPES = {
         [0, 0, 0, 0],
     ],
 }
-
-
-
-
-def pre_configure_window(screen):
-    """Configure whole stuff around game"""
-    pygame.display.set_caption("Tetris")
-    screen.fill(COLORS["darkred"])

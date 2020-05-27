@@ -10,11 +10,17 @@ import Tetromino
 import Gameboard
 
 
+def pre_configure_window(screen):
+    """Configure whole stuff around game"""
+    pygame.display.set_caption("Tetris")
+    screen.fill(config.COLORS["darkred"])
+
+
 def game():
     """Runs whole game"""
     pygame.init()
     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
-    config.pre_configure_window(screen)
+    pre_configure_window(screen)
 
     # Drawing base of game screen
     # screen.fill(config.COLORS["darkred"])

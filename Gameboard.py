@@ -5,7 +5,8 @@ import Tetromino
 
 class Gameboard:
     """Implementing board when tetrominos falls and whole game happend"""
-    fields = [[]]
+
+    # self.fields are where tetromino falls
 
     def __init__(self):
         self.initialize_board()

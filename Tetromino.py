@@ -83,7 +83,7 @@ class Tetromino:
         return False
 
 
-    def draw_bufor(self, screen):
+    def draw_buffer(self, screen):
         """Draw 4 x 4 bufor with currently falling tetromino"""
 
         rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["left"]

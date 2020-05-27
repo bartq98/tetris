@@ -28,24 +28,24 @@ def game():
     game_over = False
     game_single_frame = 0.0001
     time_steps_done_before_fall = 0
-    time_steps_to_fall_bufor = 200
+    time_steps_to_fall_buffer = 200
 
-    bufor = Tetromino.Tetromino("I", 0, 0)
+    buffer = Tetromino.Tetromino("I", 0, 0)
     gameboard = Gameboard.Gameboard()
 
     while not game_over:
         gameboard.draw_gameboard(screen) # only gameboard are redrawing in all frame
         time.sleep(game_single_frame) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
-        bufor.move(gameboard)
+        buffer.move(gameboard)
 
-        bufor.draw_bufor(screen)
+        buffer.draw_buffer(screen)
 
         time_steps_done_before_fall += 1
-        if time_steps_done_before_fall == time_steps_to_fall_bufor:
-            has_falled = bufor.fall_down(gameboard)
+        if time_steps_done_before_fall == time_steps_to_fall_buffer:
+            has_falled = buffer.fall_down(gameboard)
             if has_falled:
-                gameboard.add_blocks(bufor)
-                bufor = Tetromino.Tetromino(random.choice(("I", "Z", "S")), 4, 0)
+                gameboard.add_blocks(buffer)
+                buffer = Tetromino.Tetromino(random.choice(("I", "Z", "S")), 4, 0)
                 gameboard.delete_lines()
 
             time_steps_done_before_fall = 0

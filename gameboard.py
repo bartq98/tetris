@@ -1,4 +1,16 @@
+"""Module containg Gameboard class
+
+Gameboard class is used in main file - game.py
+
+It is responsible for:
+    - drawing board
+    - holding falling tetromino (buffer)
+    - holding information about blocks that had fallen earlier
+    - detecting which rows should be deleted (and then moving all above one block down)
+"""
+
 import pygame
+
 import config
 import tetromino
 
@@ -12,10 +24,12 @@ class Gameboard:
         self.initialize_board()
 
     def initialize_board(self):
-        # When start all fields are set to 0 (except boundaries set which are set to -1)
+        """Set proper values of self.fields - 0 when buffer can move and -1 which are borders (undeletable)"""
+
+        # When start all fields are set to 0 (except borders set which are set to -1)
         self.fields = [[0 for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
 
-        # Setting bounds to -1
+        # Setting borders to -1
         for i in range(0, config.BOARD_ROWS-1):
             for j in range(0, config.BOARD_COLUMNS):
                 if j in (0, config.BOARD_COLUMNS-1):
@@ -59,13 +73,13 @@ class Gameboard:
                          config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )
 
-    def add_blocks(self, tetromino):
+    def add_blocks(self, tetromino_buffer):
         """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""
-        y, x = tetromino.current_y, tetromino.current_x
-        
-        for i, row in enumerate(tetromino.buffer):
+        y, x = tetromino_buffer.current_y, tetromino_buffer.current_x
+
+        for i, row in enumerate(tetromino_buffer.buffer):
             for j, elem in enumerate(row):
-                if tetromino.buffer[i][j]:
+                if tetromino_buffer.buffer[i][j]:
                     self.fields[y + i][x + j] = 2
 
     def delete_lines(self):
@@ -77,11 +91,11 @@ class Gameboard:
             else:
                 rows_to_detele.append(i)
 
-        
+
         for row_index in rows_to_detele:
-            for i in range(1, len(row)-1): 
+            for i in range(1, len(row)-1):
                 self.fields[row_index][i] = 0 # delete row
 
             for j in range(row_index-1, 0, -1): # from bottom to up
-                for k in range(1, len(row)-1): 
+                for k in range(1, len(row)-1):
                     self.fields[j+1][k] = self.fields[j][k] # moves all blocks within row one row lower

@@ -1,8 +1,7 @@
 #!/bin/python3.8
 "Simple Tetris-inspired game written with Python and PyGame"
-import time
 import random
-import enum
+import time
 
 import pygame
 
@@ -36,7 +35,7 @@ def game():
 
     while not game_over:
         actuall_gameboard.draw_gameboard(screen) # only gameboard are redrawing in all frame
-        time.sleep(config.GAME_SINGLE_FRAME_sec) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
+        time.sleep(config.GAME_SINGLE_FRAME_SEC) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
         buffer.move(actuall_gameboard)
 
         buffer.draw_buffer(screen)
@@ -54,5 +53,5 @@ def game():
         pygame.display.update()
 
 # Where magic happens...
-if __name__=="__main__":
+if __name__ == "__main__":
     game()

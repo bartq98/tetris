@@ -1,20 +1,21 @@
 #!/bin/python3.8
 """Global variables used to configure neccessary stuff within project"""
-import pygame
 import enum
+
+import pygame
 
 # This file provides constans of game (windows size, colos within game, shape of tetrominos etc.)
 # You can simply set up to your own preference
 
 # Widnows size, recommended minimum resolution is 500x720
-SCREEN_WIDTH = 500
+SCREEN_WIDTH  = 500
 SCREEN_HEIGHT = 720
 
 
 # Number of rows and columns in gameboard - where tetrominos fall:
 # The oryginal tetris has 22 rows and 10 columns (remember of borderds - left, right and bottom!)
 BOARD_COLUMNS = 10 + 2 # +2 stands for left and right border lines
-BOARD_ROWS = 22 + 1 # +1 stand for bottom border line
+BOARD_ROWS    = 22 + 1 # +1 stand for bottom border line
 
 # Colors used within game to draw, you can simply add your favorite color and use it within game
 class Color(enum.Enum):
@@ -28,8 +29,8 @@ class Color(enum.Enum):
 
 
 # Sizes within game:
-BLOCK_SIZE = 18 # (in pixels) single block of tetromino/gameboard
-BOARD_WIDTH = BLOCK_SIZE * (BOARD_COLUMNS+1) #with one border row on the bottom
+BLOCK_SIZE   = 18 # (in pixels) single block of tetromino/gameboard
+BOARD_WIDTH  = BLOCK_SIZE * (BOARD_COLUMNS+1) #with one border row on the bottom
 BOARD_HEIGHT = BLOCK_SIZE * (BOARD_ROWS+2) #with two borders on left and right
 
 
@@ -44,7 +45,7 @@ GAME_BOARD_COORDS = {
     "top"  : BOARD_WITH_BORDER_COORDS["top"]
 }
 
-GAME_SINGLE_FRAME_sec = 0.0001 # interval between single steps
+GAME_SINGLE_FRAME_SEC = 0.0001 # interval between single steps
 TIME_STEPS_TO_FALL_BUFFER = 200 # how many steps is needed to fall tetromino one block down
 
 TETROMINO_SHAPES = {

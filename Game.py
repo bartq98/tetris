@@ -2,6 +2,7 @@
 "Simple Tetris-inspired game written with Python and PyGame"
 import time
 import random
+import enum
 
 import pygame
 
@@ -13,7 +14,7 @@ import Gameboard
 def pre_configure_window(screen):
     """Configure whole stuff around game"""
     pygame.display.set_caption("Tetris")
-    screen.fill(config.COLORS["darkred"])
+    screen.fill(config.Color.DARKRED.value)
 
 
 def game():
@@ -26,22 +27,22 @@ def game():
     # screen.fill(config.COLORS["darkred"])
 
     game_over = False
-    game_single_frame = 0.0001
-    time_steps_done_before_fall = 0
-    time_steps_to_fall_buffer = 200
 
     buffer = Tetromino.Tetromino("I", 0, 0)
     gameboard = Gameboard.Gameboard()
 
+    time_steps_done_before_fall = 0
+
+
     while not game_over:
         gameboard.draw_gameboard(screen) # only gameboard are redrawing in all frame
-        time.sleep(game_single_frame) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
+        time.sleep(config.GAME_SINGLE_FRAME_sec) # sleeps for every 50 miliseconds -> change to PyGame version delay() or
         buffer.move(gameboard)
 
         buffer.draw_buffer(screen)
 
         time_steps_done_before_fall += 1
-        if time_steps_done_before_fall == time_steps_to_fall_buffer:
+        if time_steps_done_before_fall == config.TIME_STEPS_TO_FALL_BUFFER:
             has_falled = buffer.fall_down(gameboard)
             if has_falled:
                 gameboard.add_blocks(buffer)

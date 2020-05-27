@@ -28,9 +28,9 @@ class Gameboard:
         """Drawing gameboard within screen"""
 
         # used colors can be simply changed
-        color_bound = config.COLORS["black"]
-        color_empty = config.COLORS["red"]
-        color_block = config.COLORS["orange"]
+        color_bound = config.Color.BLACK.value
+        color_empty = config.Color.RED.value
+        color_block = config.Color.ORANGE.value
 
         for i, row in enumerate(self.fields):
             for j, board_elem in enumerate(row):

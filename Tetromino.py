@@ -94,32 +94,7 @@ class Tetromino:
                 if elem == 1:
                     pygame.draw.rect(
                         screen, 
-                        config.COLORS["lightblue"],
-                            (rect_bufor_x+(j*config.BLOCK_SIZE), 
-                            rect_bufor_y+(i*config.BLOCK_SIZE), 
-                            config.BLOCK_SIZE, 
-                            config.BLOCK_SIZE)
-                    )
-
-    def debug_draw_bufor(self, screen):
-        rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["left"]
-        rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["top"]
-    
-        for i, row in enumerate(self.buffer):
-            for j, elem in enumerate(row):
-                if elem == 1:
-                    pygame.draw.rect(
-                        screen, 
-                        config.COLORS["lightblue"],
-                            (rect_bufor_x+(j*config.BLOCK_SIZE), 
-                            rect_bufor_y+(i*config.BLOCK_SIZE), 
-                            config.BLOCK_SIZE, 
-                            config.BLOCK_SIZE)
-                    )
-                else:
-                    pygame.draw.rect(
-                        screen, 
-                        (255, 255, 255),
+                        config.Color.LIGHTBLUE.value,
                             (rect_bufor_x+(j*config.BLOCK_SIZE), 
                             rect_bufor_y+(i*config.BLOCK_SIZE), 
                             config.BLOCK_SIZE, 

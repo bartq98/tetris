@@ -25,7 +25,7 @@ class Tetromino:
 
         # self.buffer is 4x4 array which holds current shape and rotation of tetromino
 
-        if type in config.TETROMINO_SHAPES.keys():
+        if type in config.TETROMINO_SHAPES:
             self.buffer = config.TETROMINO_SHAPES[type]
         else:
             # to
@@ -86,16 +86,22 @@ class Tetromino:
         """Return True if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
-                if self.buffer[j][i] == 1 and board.fields[self.current_y + j][self.current_x + i] in [-1, 2]:
+                if (self.buffer[j][i] == 1 and # if filled element within buffer...
+                    board.fields[self.current_y + j][self.current_x + i] in [-1, 2]): # ...intersects within borders or fallen blocks
                     return True
         return False
 
 
+    def calculate_buffor_drawing_coordinates(self):
+        rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["left"]
+        rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["top"]
+
+        return rect_bufor_x, rect_bufor_y
+
     def draw_buffer(self, screen):
         """Draw 4 x 4 bufor with currently falling tetromino"""
 
-        rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["left"]
-        rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["top"]
+        rect_bufor_x, rect_bufor_y = self.calculate_buffor_drawing_coordinates()
 
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
@@ -103,8 +109,8 @@ class Tetromino:
                     pygame.draw.rect(
                         screen,
                         config.Color.LIGHTBLUE.value,
-                            (rect_bufor_x+(j*config.BLOCK_SIZE),
-                             rect_bufor_y+(i*config.BLOCK_SIZE),
-                             config.BLOCK_SIZE,
-                             config.BLOCK_SIZE)
+                        (rect_bufor_x+(j*config.BLOCK_SIZE),
+                         rect_bufor_y+(i*config.BLOCK_SIZE),
+                         config.BLOCK_SIZE,
+                         config.BLOCK_SIZE)
                     )

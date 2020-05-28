@@ -38,6 +38,18 @@ class Gameboard:
         for i in range(0, config.BOARD_COLUMNS):
             self.fields[config.BOARD_ROWS-1][i] = -1
 
+    def draw_single_block(self, screen, color, x_rect, y_rect):
+        """Function responsible for drawing single block of gameboard"""
+        pygame.draw.rect(
+            screen,
+            color,
+            (config.GAME_BOARD_COORDS["left"] + x_rect * config.BLOCK_SIZE,
+             config.GAME_BOARD_COORDS["top"] + y_rect * config.BLOCK_SIZE,
+             config.BLOCK_SIZE, config.BLOCK_SIZE)
+        )
+
+
+
     def draw_gameboard(self, screen):
         """Drawing gameboard within screen"""
 
@@ -64,7 +76,7 @@ class Gameboard:
                          config.GAME_BOARD_COORDS["top"] + i * config.BLOCK_SIZE,
                          config.BLOCK_SIZE, config.BLOCK_SIZE)
                     )
-                elif board_elem == 2: #for falled blocks
+                elif board_elem == 2: #for fallen blocks
                     pygame.draw.rect(
                         screen,
                         color_block,

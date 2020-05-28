@@ -22,9 +22,6 @@ def game():
     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
     pre_configure_window(screen)
 
-    # Drawing base of game screen
-    # screen.fill(config.COLORS["darkred"])
-
     game_over = False
 
     buffer = tetromino.Tetromino("I", 0, 0)

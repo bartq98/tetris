@@ -44,8 +44,8 @@ class Gameboard:
         pygame.draw.rect(
             screen,
             color,
-            (config.GAME_BOARD_COORDS["left"] + x_rect * config.BLOCK_SIZE,
-             config.GAME_BOARD_COORDS["top"] + y_rect * config.BLOCK_SIZE,
+            (config.GAME_BOARD_COORDS.left + x_rect * config.BLOCK_SIZE,
+             config.GAME_BOARD_COORDS.top + y_rect * config.BLOCK_SIZE,
              config.BLOCK_SIZE, config.BLOCK_SIZE)
         )
 

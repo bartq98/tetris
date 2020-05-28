@@ -28,7 +28,7 @@ class Tetromino:
         if type in config.TETROMINO_SHAPES:
             self.buffer = config.TETROMINO_SHAPES[type]
         else:
-            # to
+            # for invalid argument of tetromino
             self.buffer = [
                 [1, 0, 0, 1],
                 [0, 0, 0, 0],
@@ -93,8 +93,8 @@ class Tetromino:
 
 
     def calculate_buffor_drawing_coordinates(self):
-        rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["left"]
-        rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS["top"]
+        rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.left
+        rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
 
         return rect_bufor_x, rect_bufor_y
 

@@ -23,6 +23,7 @@ class Gameboard:
     def __init__(self):
         self.initialize_board()
 
+
     def initialize_board(self):
         """Set proper values of self.fields - 0 when buffer can move and -1 which are borders (undeletable)"""
 
@@ -49,7 +50,6 @@ class Gameboard:
         )
 
 
-
     def draw_gameboard(self, screen):
         """Drawing gameboard within screen"""
 
@@ -67,6 +67,7 @@ class Gameboard:
                 elif board_elem == 2: #for fallen blocks
                     self.draw_single_block(screen, color_block, j, i)
 
+
     def add_blocks(self, tetromino_buffer):
         """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""
         y, x = tetromino_buffer.current_y, tetromino_buffer.current_x
@@ -75,6 +76,7 @@ class Gameboard:
             for j, elem in enumerate(row):
                 if tetromino_buffer.buffer[i][j]:
                     self.fields[y + i][x + j] = 2
+
 
     def delete_lines(self):
         """Check if specified row is empty; if yes deletes it and moves all block down."""
@@ -85,11 +87,10 @@ class Gameboard:
             else:
                 rows_to_detele.append(i)
 
-
         for row_index in rows_to_detele:
             for i in range(1, len(row)-1):
                 self.fields[row_index][i] = 0 # delete row
 
-            for j in range(row_index-1, 0, -1): # from bottom to up
-                for k in range(1, len(row)-1):
-                    self.fields[j+1][k] = self.fields[j][k] # moves all blocks within row one row lower
+            for i in range(row_index-1, 0, -1): # from bottom to up
+                for j in range(1, len(row)-1):
+                    self.fields[i+1][j] = self.fields[i][j] # moves all blocks within row one row lower

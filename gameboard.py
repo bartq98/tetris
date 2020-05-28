@@ -54,36 +54,18 @@ class Gameboard:
         """Drawing gameboard within screen"""
 
         # used colors can be simply changed
-        color_bound = config.Color.BLACK.value
+        color_border = config.Color.BLACK.value
         color_empty = config.Color.RED.value
         color_block = config.Color.ORANGE.value
 
         for i, row in enumerate(self.fields):
             for j, board_elem in enumerate(row):
                 if board_elem == 0: # for empty cells
-                    pygame.draw.rect(
-                        screen,
-                        color_empty,
-                        (config.GAME_BOARD_COORDS["left"] + j * config.BLOCK_SIZE,
-                         config.GAME_BOARD_COORDS["top"] + i * config.BLOCK_SIZE,
-                         config.BLOCK_SIZE, config.BLOCK_SIZE)
-                    )
+                    self.draw_single_block(screen, color_empty, j, i)
                 elif board_elem == -1: #for boundaries
-                    pygame.draw.rect(
-                        screen,
-                        color_bound,
-                        (config.GAME_BOARD_COORDS["left"] + j * config.BLOCK_SIZE,
-                         config.GAME_BOARD_COORDS["top"] + i * config.BLOCK_SIZE,
-                         config.BLOCK_SIZE, config.BLOCK_SIZE)
-                    )
+                    self.draw_single_block(screen, color_border, j, i)
                 elif board_elem == 2: #for fallen blocks
-                    pygame.draw.rect(
-                        screen,
-                        color_block,
-                        (config.GAME_BOARD_COORDS["left"] + j * config.BLOCK_SIZE,
-                         config.GAME_BOARD_COORDS["top"] + i * config.BLOCK_SIZE,
-                         config.BLOCK_SIZE, config.BLOCK_SIZE)
-                    )
+                    self.draw_single_block(screen, color_block, j, i)
 
     def add_blocks(self, tetromino_buffer):
         """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""

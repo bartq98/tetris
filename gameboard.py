@@ -31,9 +31,9 @@ class Gameboard:
         self.fields = [[0 for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
 
         for i in range(0, config.BOARD_ROWS-1): # except the last row
-            for j in range(0, config.BOARD_COLUMNS):
-                if j in (0, config.BOARD_COLUMNS-1):
-                    self.fields[i][j] = config.BORDER_BLOCK
+            # set first and last column of i row as border
+            self.fields[i][0] = config.BORDER_BLOCK
+            self.fields[i][config.BOARD_COLUMNS-1] = config.BORDER_BLOCK
 
         for i in range(0, config.BOARD_COLUMNS):
             self.fields[config.BOARD_ROWS-1][i] = config.BORDER_BLOCK
@@ -73,7 +73,7 @@ class Gameboard:
 
         for i, row in enumerate(tetromino_buffer.buffer):
             for j, elem in enumerate(row):
-                if tetromino_buffer.buffer[i][j]:
+                if tetromino_buffer.buffer[i][j] == config.BUFFER_BLOCK:
                     self.fields[y + i][x + j] = config.FALLED_BLOCK
 
 

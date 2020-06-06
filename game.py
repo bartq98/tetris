@@ -55,4 +55,3 @@ def game():
 # Where magic happens...
 if __name__ == "__main__":
     game()
-rotate

@@ -16,10 +16,10 @@ To play this game, clone this repo, change directory and run ```./Game.py``` fil
 You can control falling tetromino as in the classic NES version:
 |Arrow|Action|
 |: -: |: -: |
-| ↑ | rotates tetromino clockwise |
-| ↓ | speeds up falling down |
-| → | moves left |
-| ← | moves right |
+| ↑ 	| rotates tetromino clockwise 	|
+| ↓ 	| speeds up falling down 	|
+| → 	| moves left 	|
+| ← 	| moves right 	|
 
 ## Do you prefer orange or pink?
 This game is fully customizable. The constans used to set window size and colors within game are located in ```config.py``` file.

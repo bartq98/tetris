@@ -21,18 +21,22 @@ BOARD_ROWS    = 22 + 1 # +1 stand for bottom border line
 # Colors used within game to draw, you can simply add your favorite color and use it within game
 class Color(enum.Enum):
     """Make human-readable aliases of colors used in game"""
-    LIGHTBLUE = (173, 216, 230)
-    RED       = (220, 20, 60)
-    DARKRED   = (100, 10, 10)
     BLACK     = (0, 0, 0)
+    DARKRED   = (100, 10, 10)
+    LIGHTBLUE = (173, 216, 230)
     ORANGE    = (255, 165, 0)
+    RED       = (220, 20, 60)
 
+BORDER_BLOCK = -1
+BUFFER_BLOCK = 1
+EMPTY_BLOCK  = 0
+FALLED_BLOCK = 2
 
 
 # Sizes within game:
 BLOCK_SIZE   = 18 # (in pixels) single block of tetromino/gameboard
 BOARD_WIDTH  = BLOCK_SIZE * (BOARD_COLUMNS+1) #with one border row on the bottom
-BOARD_HEIGHT = BLOCK_SIZE * (BOARD_ROWS+2) #with two borders on left and right
+BOARD_HEIGHT = BLOCK_SIZE * (BOARD_ROWS+2)    #with two borders on left and right
 
 
 

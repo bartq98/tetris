@@ -34,3 +34,12 @@ pygame.draw.rect(
 				 board_width - 2 * block_size,
 				 board_height - block_size)
 		)
+
+
+Do testów:
+    · wziąć funkcje z całego modułu
+    · zestaw danych wejsciowych i oczekiwanch wyjściowych 
+    · w testach odpalam te funkcje z dany we. 
+    · 
+
+ -> change to PyGame version delay() or

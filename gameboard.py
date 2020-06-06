@@ -30,23 +30,22 @@ class Gameboard:
         # When start all fields are set to 0 (except borders set which are set to -1)
         self.fields = [[0 for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
 
-        # Setting borders to -1
-        for i in range(0, config.BOARD_ROWS-1):
+        for i in range(0, config.BOARD_ROWS-1): # except the last row
             for j in range(0, config.BOARD_COLUMNS):
                 if j in (0, config.BOARD_COLUMNS-1):
-                    self.fields[i][j] = -1
+                    self.fields[i][j] = config.BORDER_BLOCK
 
         for i in range(0, config.BOARD_COLUMNS):
-            self.fields[config.BOARD_ROWS-1][i] = -1
+            self.fields[config.BOARD_ROWS-1][i] = config.BORDER_BLOCK
 
     def draw_single_block(self, screen, color, x_rect, y_rect):
         """Function responsible for drawing single block of gameboard"""
         pygame.draw.rect(
             screen,
             color,
-            (config.GAME_BOARD_COORDS.left + x_rect * config.BLOCK_SIZE,
-             config.GAME_BOARD_COORDS.top + y_rect * config.BLOCK_SIZE,
-             config.BLOCK_SIZE, config.BLOCK_SIZE)
+             (config.GAME_BOARD_COORDS.left + x_rect * config.BLOCK_SIZE,
+              config.GAME_BOARD_COORDS.top  + y_rect * config.BLOCK_SIZE,
+              config.BLOCK_SIZE, config.BLOCK_SIZE)
         )
 
 
@@ -54,17 +53,17 @@ class Gameboard:
         """Drawing gameboard within screen"""
 
         # used colors can be simply changed
+        color_block  = config.Color.ORANGE.value
         color_border = config.Color.BLACK.value
-        color_empty = config.Color.RED.value
-        color_block = config.Color.ORANGE.value
+        color_empty  = config.Color.RED.value
 
         for i, row in enumerate(self.fields):
             for j, board_elem in enumerate(row):
-                if board_elem == 0: # for empty cells
+                if board_elem == config.EMPTY_BLOCK:
                     self.draw_single_block(screen, color_empty, j, i)
-                elif board_elem == -1: #for boundaries
+                elif board_elem == config.BORDER_BLOCK:
                     self.draw_single_block(screen, color_border, j, i)
-                elif board_elem == 2: #for fallen blocks
+                elif board_elem == config.FALLED_BLOCK:
                     self.draw_single_block(screen, color_block, j, i)
 
 
@@ -75,7 +74,7 @@ class Gameboard:
         for i, row in enumerate(tetromino_buffer.buffer):
             for j, elem in enumerate(row):
                 if tetromino_buffer.buffer[i][j]:
-                    self.fields[y + i][x + j] = 2
+                    self.fields[y + i][x + j] = config.FALLED_BLOCK
 
 
     def delete_lines(self):

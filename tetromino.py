@@ -37,7 +37,7 @@ class Tetromino:
             ],
 
 
-    def rotate_buffor(self, bufor, clockwise=True):
+    def rotate(self, bufor, clockwise=True):
         """Roates bufor clockwise"""
         rotated_array = [
             [0, 0, 0, 0],
@@ -50,6 +50,7 @@ class Tetromino:
             for j in range(0, 4):
                 rotated_array[i][j] = bufor[3-j][i] if clockwise else bufor[j][3-i]
         return rotated_array
+
 
     def fall_down(self, board: gameboard.Gameboard):
         """Moves buffer one block down"""
@@ -66,9 +67,9 @@ class Tetromino:
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    self.buffer = self.rotate_buffor(self.buffer)
+                    self.buffer = self.rotate(self.buffer)
                     if self.will_collide(board):
-                        self.buffer = self.rotate_buffor(self.buffer, clockwise=False)
+                        self.buffer = self.rotate(self.buffer, clockwise=False)
                 if event.key == pygame.K_LEFT:
                     self.current_x -= 1
                     if self.will_collide(board):
@@ -87,7 +88,7 @@ class Tetromino:
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
                 if (self.buffer[j][i] == 1 and # if filled element within buffer...
-                    board.fields[self.current_y + j][self.current_x + i] in [-1, 2]): # ...intersects within borders or fallen blocks
+                    board.fields[self.current_y + j][self.current_x + i] in [config.BORDER_BLOCK, config.FALLED_BLOCK]): # ...intersects within borders or fallen blocks
                     return True
         return False
 
@@ -98,14 +99,14 @@ class Tetromino:
 
         return rect_bufor_x, rect_bufor_y
 
-    def draw_buffer(self, screen):
+    def draw(self, screen):
         """Draw 4 x 4 bufor with currently falling tetromino"""
 
         rect_bufor_x, rect_bufor_y = self.calculate_buffor_drawing_coordinates()
 
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
-                if elem == 1:
+                if elem == config.BUFFER_BLOCK:
                     pygame.draw.rect(
                         screen,
                         config.Color.LIGHTBLUE.value,

@@ -14,8 +14,8 @@ To play this game, clone this repo, change directory and run ```./Game.py``` fil
 
 ## How to play?
 You can control falling tetromino as in the classic NES version:
-|Arrow|Action|
-|: -: |: -: |
+| Arrow	| Action	|
+| : -: 	| : -: 	|
 | ↑ 	| rotates tetromino clockwise 	|
 | ↓ 	| speeds up falling down 	|
 | → 	| moves left 	|

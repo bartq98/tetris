@@ -16,7 +16,7 @@ import gameboard
 
 class Tetromino:
 
-    def __init__(self, type, x, y):
+    def __init__(self, type, x=4, y=0):
         """Initializes falling tetromino."""
 
         # cooridantes of [0][0] (top left element) of buffor on gameboard

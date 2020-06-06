@@ -24,7 +24,7 @@ def game():
     pygame.init()
     screen = pre_configure_window()
 
-    buffer = tetromino.Tetromino("I", 0, 0)
+    buffer = tetromino.Tetromino("I")
     actuall_gameboard = gameboard.Gameboard()
 
     time_steps_done_before_fall = 0
@@ -43,9 +43,10 @@ def game():
         time_steps_done_before_fall += 1
         if time_steps_done_before_fall == config.TIME_STEPS_TO_FALL_BUFFER:
             has_falled = buffer.fall_down(actuall_gameboard)
+            
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
-                buffer = tetromino.Tetromino(random.choice(list(config.TETROMINO_SHAPES)), 4, 0)
+                buffer = tetromino.Tetromino(random.choice(list(config.TETROMINO_SHAPES)))
                 actuall_gameboard.delete_lines()
 
             time_steps_done_before_fall = 0

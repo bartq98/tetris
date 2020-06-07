@@ -16,7 +16,7 @@ import gameboard
 
 class Tetromino:
 
-    def __init__(self, type, x=4, y=0):
+    def __init__(self, type, times_rotated=0, x=4, y=0):
         """Initializes falling tetromino."""
 
         # cooridantes of [0][0] (top left element) of buffor on gameboard
@@ -27,6 +27,8 @@ class Tetromino:
 
         if type in config.TETROMINO_SHAPES:
             self.buffer = config.TETROMINO_SHAPES[type]
+            for i in range(times_rotated):
+                self.buffer = self.rotate(self.buffer)
         else:
             # for invalid argument of tetromino
             self.buffer = [

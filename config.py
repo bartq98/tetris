@@ -32,6 +32,10 @@ BUFFER_BLOCK = 1
 EMPTY_BLOCK  = 0
 FALLED_BLOCK = 2
 
+POINTS_HEIGHT = 5
+POINTS_GAP    = 25
+
+
 
 # Sizes within game:
 BLOCK_SIZE   = 18 # (in pixels) single block of tetromino/gameboard

@@ -16,18 +16,45 @@ class TetrominoTest(unittest.TestCase):
 
     def test_rotate(self):
         """Testing method rotate from Tetromino."""
-        self.testing_tetromino = tetromino.Tetromino("I")
-        self.testing_tetromino.buffer = self.testing_tetromino.rotate(self.testing_tetromino.buffer)
-        Z_after_rotate =  [
+
+        # test for config.TETROMINO_SHAPES["I"] rotated once clockwise and oposite
+        testing_tetromino = tetromino.Tetromino("I")
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        I_after_rotate = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [1, 1, 1, 1],
             [0, 0, 0, 0],
         ]
-        self.assertEqual(self.testing_tetromino.buffer, Z_after_rotate)
+        self.assertEqual(testing_tetromino.buffer, I_after_rotate)
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer, clockwise=False) # return to previous (initial) value
+        self.assertEqual(testing_tetromino.buffer, config.TETROMINO_SHAPES["I"])
 
 
-        pass
+        # test for config.TETROMINO_SHAPES["Z"] rotated once clockwise and oposite
+        testing_tetromino = tetromino.Tetromino("Z")
+
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        Z_after_rotate = [
+            [0, 0, 0, 0],
+            [0, 0, 1, 0],
+            [0, 1, 1, 0],
+            [0, 1, 0, 0],
+        ]
+        self.assertEqual(testing_tetromino.buffer, Z_after_rotate)
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        print(testing_tetromino.buffer)
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        print(testing_tetromino.buffer)
+        # Z_after_rotate_once_again = [
+        #     [0, 0, 0, 0],
+        #     [1, 1, 0, 0],
+        #     [0, 1, 1, 0],
+        #     [0, 0, 0, 0],
+        # ]
+        # self.assertEqual(testing_tetromino.buffer, Z_after_rotate_once_again)
+
+
 
     def test_fall_down(self):
         pass

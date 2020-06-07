@@ -90,7 +90,7 @@ class Tetromino:
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
                 if (self.buffer[j][i] == 1 and # if filled element within buffer...
-                    board.fields[self.current_y + j][self.current_x + i] in [config.BORDER_BLOCK, config.FALLED_BLOCK]): # ...intersects within borders or fallen blocks
+                    board.fields[self.current_y + j][self.current_x + i] in [config.BORDER_BLOCK, config.FALLEN_BLOCK]): # ...intersects within borders or fallen blocks
                     return True
         return False
 

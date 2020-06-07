@@ -63,18 +63,18 @@ class Gameboard:
                     self.draw_single_block(screen, color_empty, j, i)
                 elif board_elem == config.BORDER_BLOCK:
                     self.draw_single_block(screen, color_border, j, i)
-                elif board_elem == config.FALLED_BLOCK:
+                elif board_elem == config.FALLEN_BLOCK:
                     self.draw_single_block(screen, color_block, j, i)
 
 
-    def add_blocks(self, tetromino_buffer):
+    def add_blocks(self, tetromino):
         """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""
-        y, x = tetromino_buffer.current_y, tetromino_buffer.current_x
+        y, x = tetromino.current_y, tetromino.current_x
 
-        for i, row in enumerate(tetromino_buffer.buffer):
+        for i, row in enumerate(tetromino.buffer):
             for j, elem in enumerate(row):
-                if tetromino_buffer.buffer[i][j] == config.BUFFER_BLOCK:
-                    self.fields[y + i][x + j] = config.FALLED_BLOCK
+                if tetromino.buffer[i][j] == config.BUFFER_BLOCK:
+                    self.fields[y + i][x + j] = config.FALLEN_BLOCK
 
 
     def delete_lines(self):

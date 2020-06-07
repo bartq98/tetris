@@ -8,6 +8,7 @@ import pygame
 import config
 import tetromino
 import gameboard
+import evaluator
 
 
 def pre_configure_window():
@@ -46,7 +47,7 @@ def game():
             
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
-                buffer = tetromino.Tetromino(random.choice(list(config.TETROMINO_SHAPES)))
+                buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, 0)
                 actuall_gameboard.delete_lines()
 
             time_steps_done_before_fall = 0

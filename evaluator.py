@@ -5,6 +5,7 @@ import tetromino
 import gameboard
 import time
 import copy
+import random
 
 """
     Evaluates gameboard and chooses the next tetromino to fall
@@ -13,13 +14,13 @@ import copy
 class Evaluator():
 
     @staticmethod
-    def simulate_falling(new_board: gameboard.Gameboard, new_buffer: tetromino.Tetromino):
-        # new_board  = copy.deepcopy(board)
-        # new_buffer = copy.deepcopy(buffer)
+    def simulate_falling(board: gameboard.Gameboard, buffer: tetromino.Tetromino):
+        new_board  = copy.deepcopy(board)
+        new_buffer = copy.deepcopy(buffer)
 
         # if it collides at start - made for more elastic shifting tetromino of various shapes
         if new_buffer.will_collide(new_board):
-            return new_board
+            return False
         else:
             has_falled = 0
             while not has_falled:
@@ -31,6 +32,9 @@ class Evaluator():
     def calculate(board: gameboard.Gameboard, buffer: tetromino.Tetromino):
         board_to_calculate = Evaluator.simulate_falling(board, buffer)
         
+        if board_to_calculate is False:
+            return False
+
         columns_to_check = config.BOARD_COLUMNS-1
         rows_to_check    = config.BOARD_ROWS-1
         score = 0
@@ -55,53 +59,76 @@ class Evaluator():
         return score
 
     @staticmethod
-    def generate_block(board: gameboard.Gameboard):
+    def test_all_cases(board: gameboard.Gameboard):
         
-        ile_razy = 0
+        most_unwanted_tetrominos = {}
         
         start_width = 1
         rotates = 4
 
         for shape in config.TETROMINO_SHAPES:
             if shape == "I":
-                end_width   = config.BOARD_COLUMNS-2
+                end_width = config.BOARD_COLUMNS-2
             else:
-                end_width   = config.BOARD_COLUMNS-1
+                end_width = config.BOARD_COLUMNS-1
             for rotate in range(rotates):
                 for x_shift in range(start_width, end_width):
                         testing_buffer = tetromino.Tetromino(shape, rotates, x_shift)
                         score = Evaluator.calculate(board, testing_buffer)
-                        ile_razy +=1
-                        print(f"{ile_razy} raz dał {score} punktów")
+                        if score is False:
+                            continue
+                        most_unwanted_tetrominos[f"{shape}-{rotate}-{x_shift}"] = score
+
+        return most_unwanted_tetrominos
+
+    @staticmethod
+    def generate_tetromino(board: gameboard.Gameboard, malice_level: int):
+        most_unwanted_tetrominos = Evaluator.test_all_cases(board)
+
+        # make list with tuples - first elem. of tuple is shape-rotate-x_shift str, second - score of this tetromino
+        most_unwanted_tetrominos = sorted(most_unwanted_tetrominos.items(), key=lambda x: x[1], reverse=False)
+
+        diffrent_malice_levels = 10
+        size_range = len(most_unwanted_tetrominos) // diffrent_malice_levels 
+        random_but_malice = malice_level*size_range - random.randint(0, size_range)
+
+        chosed_tetromino = most_unwanted_tetrominos[random_but_malice][0] #
+        shape, rotate, x_shift = chosed_tetromino.split("-")
+        print(f"{shape}-{rotate}-{x_shift}")
+        rotate = int(rotate)
+        x_shift = int(x_shift)
+        return tetromino.Tetromino(shape, times_rotated=rotate, x=x_shift)
 
 
+# # to test evaluator - will be deleted soon...
+# testing_board = gameboard.Gameboard()
+# testing_board.fields[21][1] = 2
+# testing_board.fields[21][2] = 2
+# testing_board.fields[21][3] = 2
+# testing_board.fields[21][4] = 2
+# testing_board.fields[21][5] = 2
+# testing_board.fields[21][6] = 2
+# testing_board.fields[20][1] = 2
+# testing_board.fields[20][2] = 2
+# testing_board.fields[20][3] = 2
+# testing_board.fields[0][9] = 2
+# test_teto = tetromino.Tetromino("I", times_rotated=2, x=3)
 
-
-testing_board = gameboard.Gameboard()
-testing_board.fields[21][1] = 2
-testing_board.fields[21][2] = 2
-testing_board.fields[21][3] = 2
-testing_board.fields[21][4] = 2
-testing_board.fields[21][5] = 2
-testing_board.fields[21][6] = 2
-testing_board.fields[20][1] = 2
-testing_board.fields[20][2] = 2
-testing_board.fields[20][3] = 2
-testing_board.fields[0][9] = 2
-test_teto = tetromino.Tetromino("I", times_rotated=2, x=3)
-
-def pre_configure_window():
-    """Configure whole stuff around game"""
+# def pre_configure_window():
+#     """Configure whole stuff around game"""
     
-    pygame.display.set_caption("Tetris by Bartq98")
-    screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
-    screen.fill(config.Color.DARKRED.value)
-    return screen
+#     pygame.display.set_caption("Tetris by Bartq98")
+#     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+#     screen.fill(config.Color.DARKRED.value)
+#     return screen
 
-screen = pre_configure_window()
-pygame.init()
-score = Evaluator.calculate(testing_board, test_teto)
-print(score)
-testing_board.draw_gameboard(screen)
-pygame.display.update()
-time.sleep(30)
+# screen = pre_configure_window()
+# pygame.init()
+# score = Evaluator.calculate(testing_board, test_teto)
+# score2 = Evaluator.test_all_cases(testing_board)
+# test_teto = Evaluator.generate_tetromino(testing_board, 4)
+# print(test_teto.buffer)
+# print(score)
+# testing_board.draw_gameboard(screen)
+# pygame.display.update()
+# time.sleep(30)

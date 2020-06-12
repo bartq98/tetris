@@ -16,7 +16,7 @@ import gameboard
 
 class Tetromino:
 
-    def __init__(self, type, x=4, y=0):
+    def __init__(self, type, times_rotated=0, x=4, y=0):
         """Initializes falling tetromino."""
 
         # cooridantes of [0][0] (top left element) of buffor on gameboard
@@ -27,8 +27,10 @@ class Tetromino:
 
         if type in config.TETROMINO_SHAPES:
             self.buffer = config.TETROMINO_SHAPES[type]
-        else:
-            # for invalid argument of tetromino
+            for i in range(times_rotated):
+                self.buffer = self.rotate(self.buffer)
+        else: # for invalid argument of tetromino
+            # below - it clearly shows the error
             self.buffer = [
                 [1, 0, 0, 1],
                 [0, 0, 0, 0],
@@ -36,9 +38,8 @@ class Tetromino:
                 [1, 0, 0, 1]
             ],
 
-
     def rotate(self, bufor, clockwise=True):
-        """Roates bufor clockwise"""
+        """Roates bufor clockwise or counterclockwise"""
         rotated_array = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -51,9 +52,9 @@ class Tetromino:
                 rotated_array[i][j] = bufor[3-j][i] if clockwise else bufor[j][3-i]
         return rotated_array
 
-
     def fall_down(self, board: gameboard.Gameboard):
-        """Moves buffer one block down"""
+        """Moves buffer one block down
+        and returns True when the block collides with previously fallen blocks"""
         self.current_y += 1
         if self.will_collide(board):
             self.current_y -= 1
@@ -84,23 +85,23 @@ class Tetromino:
                         self.current_y -= 1
 
     def will_collide(self, board: gameboard):
-        """Return True if buffer can move in specified direction, otherwise return False"""
+        """Return False if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
                 if (self.buffer[j][i] == 1 and # if filled element within buffer...
-                    board.fields[self.current_y + j][self.current_x + i] in [config.BORDER_BLOCK, config.FALLED_BLOCK]): # ...intersects within borders or fallen blocks
+                    board.fields[self.current_y + j][self.current_x + i] in [config.BORDER_BLOCK, config.FALLEN_BLOCK]): # ...intersects within borders or fallen blocks
                     return True
         return False
 
-
     def calculate_buffor_drawing_coordinates(self):
+        """Calculates drawing coordinates necessarry while drawing single block"""
         rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.left
         rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
 
         return rect_bufor_x, rect_bufor_y
 
     def draw(self, screen):
-        """Draw 4 x 4 bufor with currently falling tetromino"""
+        """Draws 4 x 4 bufor of currently falling tetromino"""
 
         rect_bufor_x, rect_bufor_y = self.calculate_buffor_drawing_coordinates()
 
@@ -115,3 +116,6 @@ class Tetromino:
                          config.BLOCK_SIZE,
                          config.BLOCK_SIZE)
                     )
+
+    def __str__(self):
+        return f"\n {self.buffer[0]} \n {self.buffer[1]} \n {self.buffer[2]} \n {self.buffer[3]} \n"

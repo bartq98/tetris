@@ -5,13 +5,14 @@ import enum
 
 import pygame
 
+MALICIOUS_LEVEL = 9 # from 0 do 9
+
 # This file provides constans of game (windows size, colos within game, shape of tetrominos etc.)
 # You can simply set up to your own preference
 
 # Widnows size, recommended minimum resolution is 500x720
 SCREEN_WIDTH  = 500
 SCREEN_HEIGHT = 720
-
 
 # Number of rows and columns in gameboard - where tetrominos fall:
 # The oryginal tetris has 22 rows and 10 columns (remember of borderds - left, right and bottom!)
@@ -30,24 +31,23 @@ class Color(enum.Enum):
 BORDER_BLOCK = -1
 BUFFER_BLOCK = 1
 EMPTY_BLOCK  = 0
-FALLED_BLOCK = 2
+FALLEN_BLOCK = 2
 
+# For calculating points within Evaluator
+POINTS_HEIGHT = 5
+POINTS_GAP    = 10
 
 # Sizes within game:
 BLOCK_SIZE   = 18 # (in pixels) single block of tetromino/gameboard
 BOARD_WIDTH  = BLOCK_SIZE * (BOARD_COLUMNS+1) #with one border row on the bottom
 BOARD_HEIGHT = BLOCK_SIZE * (BOARD_ROWS+2)    #with two borders on left and right
 
-
-
 Gameboard_coords_on_screen = collections.namedtuple('Gameboard_coords_on_screen', ['top', 'left'])
-
 # For drawing gameboard with borders around
 BOARD_WITH_BORDER_COORDS = Gameboard_coords_on_screen(
     top  = (SCREEN_WIDTH / 2 - BOARD_WIDTH / 2),
     left = (SCREEN_HEIGHT / 2 - BOARD_HEIGHT / 2),
 )
-
 # For actuall gameboard - when tetromino falls etc.
 GAME_BOARD_COORDS = Gameboard_coords_on_screen(
     top  = BOARD_WITH_BORDER_COORDS.top,

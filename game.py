@@ -8,6 +8,7 @@ import pygame
 import config
 import tetromino
 import gameboard
+import evaluator
 
 
 def pre_configure_window():
@@ -24,7 +25,7 @@ def game():
     pygame.init()
     screen = pre_configure_window()
 
-    buffer = tetromino.Tetromino("I")
+    buffer = tetromino.Tetromino("I", times_rotated=0, x=3, y=0)
     actuall_gameboard = gameboard.Gameboard()
 
     time_steps_done_before_fall = 0
@@ -46,12 +47,16 @@ def game():
             
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
-                buffer = tetromino.Tetromino(random.choice(list(config.TETROMINO_SHAPES)))
+                buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, config.MALICIOUS_LEVEL)
+                if buffer.fall_down(actuall_gameboard): # while newly added tetromino instantly touching fallen blocks
+                    game_over = True
+                    print(f"Thank You for your play - waiting to see u next time!")
                 actuall_gameboard.delete_lines()
 
             time_steps_done_before_fall = 0
 
         pygame.display.update()
+
 
 # Where magic happens...
 if __name__ == "__main__":

@@ -12,7 +12,24 @@ import tetromino
 
 class TetrominoTest(unittest.TestCase):
 
-    # __init__
+    def test__init__(self):
+        testing_x = 3
+        testing_y = 4
+        testing_times_rotated = 1
+        testing_type = "T"
+
+        tetromino_proper_shape = [
+            [0, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 0, 0],
+        ]
+
+        testing_tetromino = tetromino.Tetromino(type=testing_type, times_rotated=testing_times_rotated, x=testing_x, y=testing_y)
+        self.assertEqual(testing_tetromino.current_x, testing_x)
+        self.assertEqual(testing_tetromino.current_y, testing_y)
+        self.assertEqual(testing_tetromino.buffer, tetromino_proper_shape)
+
 
     def test_rotate(self):
         """Testing method rotate from Tetromino."""
@@ -30,7 +47,6 @@ class TetrominoTest(unittest.TestCase):
         testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer, clockwise=False) # return to previous (initial) value
         self.assertEqual(testing_tetromino.buffer, config.TETROMINO_SHAPES["I"])
 
-
         # test for config.TETROMINO_SHAPES["Z"] rotated once clockwise and oposite
         testing_tetromino = tetromino.Tetromino("Z")
 
@@ -42,18 +58,20 @@ class TetrominoTest(unittest.TestCase):
             [0, 1, 0, 0],
         ]
         self.assertEqual(testing_tetromino.buffer, Z_after_rotate)
-        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
-        print(testing_tetromino.buffer)
-        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
-        print(testing_tetromino.buffer)
-        # Z_after_rotate_once_again = [
-        #     [0, 0, 0, 0],
-        #     [1, 1, 0, 0],
-        #     [0, 1, 1, 0],
-        #     [0, 0, 0, 0],
-        # ]
-        # self.assertEqual(testing_tetromino.buffer, Z_after_rotate_once_again)
 
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer, clockwise=False)
+        # should be same like previous - Z_after_rotate
+        self.assertEqual(testing_tetromino.buffer, Z_after_rotate)
+
+        testing_tetromino.buffer = testing_tetromino.rotate(testing_tetromino.buffer)
+        Z_after_rotate_once_again = [
+            [0, 0, 0, 0],
+            [1, 1, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+        ]
+        self.assertEqual(testing_tetromino.buffer, Z_after_rotate_once_again)
 
 
     def test_fall_down(self):
@@ -68,8 +86,6 @@ class TetrominoTest(unittest.TestCase):
     def test_calculate_buffor_drawing_coordinates(self):
         pass
 
-    def test_draw(self):
-        pass
 
 if __name__ == "__main__":
     unittest.main()

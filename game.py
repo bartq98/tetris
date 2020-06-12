@@ -47,7 +47,7 @@ def game():
             
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
-                buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, 0)
+                buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, 9)
                 actuall_gameboard.delete_lines()
 
             time_steps_done_before_fall = 0

@@ -117,3 +117,6 @@ class Tetromino:
                          config.BLOCK_SIZE,
                          config.BLOCK_SIZE)
                     )
+
+    def __str__(self):
+        return f"\n {self.buffer[0]} \n {self.buffer[1]} \n {self.buffer[2]} \n {self.buffer[3]} \n"

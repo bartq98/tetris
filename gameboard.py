@@ -28,7 +28,7 @@ class Gameboard:
         """Set proper values of self.fields - 0 when buffer can move and -1 which are borders (undeletable)"""
 
         # When start all fields are set to 0 (except borders set which are set to -1)
-        self.fields = [[0 for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
+        self.fields = [[config.EMPTY_BLOCK for i in range(0, config.BOARD_COLUMNS)] for j in range(0, config.BOARD_ROWS)]
 
         for i in range(0, config.BOARD_ROWS-1): # except the last row
             # set first and last column of i row as border
@@ -69,7 +69,7 @@ class Gameboard:
 
 
     def add_blocks(self, tetromino):
-        """Adding single blocks of falled tetromino to self.fields => setting them to value 2"""
+        """Adding single blocks of fallen tetromino to self.fields => setting them o config.FALLEN_BLOCK"""
         y, x = tetromino.current_y, tetromino.current_x
 
         for i, row in enumerate(tetromino.buffer):
@@ -79,18 +79,22 @@ class Gameboard:
 
 
     def delete_lines(self):
-        """Check if specified row is empty; if yes deletes it and moves all block down."""
+        """Check if specified row is empty; if yes deletes it and moves all blocks down"""
         rows_to_detele = [] # holds indexes of filled rows
-        for i, row in enumerate(self.fields[:-1]):
-            if 0 in row[1:len(row)-1]: # in i row is 0, so it isn't empty
+
+        row_first_elem_to_check = 1
+        row_last_elem_to_check  = len(self.fields[0])-1
+
+        for i, row in enumerate(self.fields[:-1]): # except the border on bottom of gameboard
+            if config.EMPTY_BLOCK in row[row_first_elem_to_check:row_last_elem_to_check]:
                 continue
             else:
                 rows_to_detele.append(i)
 
         for row_index in rows_to_detele:
-            for i in range(1, len(row)-1):
-                self.fields[row_index][i] = 0 # delete row
+            for i in range(row_first_elem_to_check, row_last_elem_to_check):
+                self.fields[row_index][i] = config.EMPTY_BLOCK # delete row
 
             for i in range(row_index-1, 0, -1): # from bottom to up
-                for j in range(1, len(row)-1):
+                for j in range(row_first_elem_to_check, row_last_elem_to_check):
                     self.fields[i+1][j] = self.fields[i][j] # moves all blocks within row one row lower

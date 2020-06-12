@@ -63,6 +63,7 @@ class Tetromino:
         else:
             return False
 
+
     def move(self, board: gameboard.Gameboard):
         """Moves bufor by pressing keys"""
         events = pygame.event.get()
@@ -85,6 +86,7 @@ class Tetromino:
                     if self.will_collide(board):
                         self.current_y -= 1
 
+
     def will_collide(self, board: gameboard):
         """Return True if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
@@ -100,6 +102,7 @@ class Tetromino:
         rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
 
         return rect_bufor_x, rect_bufor_y
+
 
     def draw(self, screen):
         """Draw 4 x 4 bufor with currently falling tetromino"""
@@ -117,6 +120,7 @@ class Tetromino:
                          config.BLOCK_SIZE,
                          config.BLOCK_SIZE)
                     )
+
 
     def __str__(self):
         return f"\n {self.buffer[0]} \n {self.buffer[1]} \n {self.buffer[2]} \n {self.buffer[3]} \n"

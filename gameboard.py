@@ -38,6 +38,7 @@ class Gameboard:
         for i in range(0, config.BOARD_COLUMNS):
             self.fields[config.BOARD_ROWS-1][i] = config.BORDER_BLOCK
 
+
     def draw_single_block(self, screen, color, x_rect, y_rect):
         """Function responsible for drawing single block of gameboard"""
         pygame.draw.rect(

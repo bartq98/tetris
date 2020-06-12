@@ -103,9 +103,16 @@ class TetrominoTest(unittest.TestCase):
 
         pass
 
-    def test_calculate_buffor_drawing_coordinates(self):
-        pass
 
+    def test_calculate_buffor_drawing_coordinates(self):
+        testing_tetromino = tetromino.Tetromino("I", times_rotated=0, x=5, y=0)
+        x_to_test = testing_tetromino.current_x
+        y_to_test = testing_tetromino.current_y
+        
+        x_to_draw_rect = (x_to_test * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.left
+        y_to_draw_rect = (y_to_test * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
+
+        self.assertEqual(testing_tetromino.calculate_buffor_drawing_coordinates(), (x_to_draw_rect, y_to_draw_rect))
 
 if __name__ == "__main__":
     unittest.main()

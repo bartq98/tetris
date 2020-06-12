@@ -54,6 +54,7 @@ def game():
 
         pygame.display.update()
 
+
 # Where magic happens...
 if __name__ == "__main__":
     game()

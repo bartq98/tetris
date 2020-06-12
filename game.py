@@ -48,6 +48,9 @@ def game():
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
                 buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, 9)
+                if buffer.fall_down(actuall_gameboard): # while newly added tetromino instantly touching falled blocks
+                    game_over = True
+                    print(f"Thank You for your play - waiting to see u next time!")
                 actuall_gameboard.delete_lines()
 
             time_steps_done_before_fall = 0

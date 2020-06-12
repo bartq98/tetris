@@ -9,6 +9,7 @@ import unittest
 
 import config
 import tetromino
+import gameboard
 
 class TetrominoTest(unittest.TestCase):
 
@@ -75,7 +76,16 @@ class TetrominoTest(unittest.TestCase):
 
 
     def test_fall_down(self):
-        pass
+        gameboard_tested = gameboard.Gameboard()
+        testing_tetromino = tetromino.Tetromino("I", times_rotated=0, x=3, y=18)
+        self.assertEqual(testing_tetromino.fall_down(gameboard_tested), True)
+
+        # simulating falling of three blocks down
+        testing_tetromino.current_y -= 3
+        self.assertEqual(testing_tetromino.fall_down(gameboard_tested), False)
+        testing_tetromino.current_y += 3
+        self.assertEqual(testing_tetromino.fall_down(gameboard_tested), True)
+
 
     def test_move(self):
         pass

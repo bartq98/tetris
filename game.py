@@ -25,7 +25,7 @@ def game():
     pygame.init()
     screen = pre_configure_window()
 
-    buffer = tetromino.Tetromino("I")
+    buffer = tetromino.Tetromino("I", times_rotated=0, x=3, y=15)
     actuall_gameboard = gameboard.Gameboard()
 
     time_steps_done_before_fall = 0

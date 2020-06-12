@@ -10,6 +10,7 @@ import config
 import tetromino
 import gameboard
 
+
 class TetrominoTest(unittest.TestCase):
 
     def test__init__(self):
@@ -29,7 +30,6 @@ class TetrominoTest(unittest.TestCase):
         self.assertEqual(testing_tetromino.current_x, testing_x)
         self.assertEqual(testing_tetromino.current_y, testing_y)
         self.assertEqual(testing_tetromino.buffer, tetromino_proper_shape)
-
 
     def test_rotate(self):
         """Testing method rotate from Tetromino."""
@@ -73,7 +73,6 @@ class TetrominoTest(unittest.TestCase):
         ]
         self.assertEqual(testing_tetromino.buffer, Z_after_rotate_once_again)
 
-
     def test_fall_down(self):
         gameboard_tested = gameboard.Gameboard()
         testing_tetromino = tetromino.Tetromino("I", times_rotated=0, x=3, y=18)
@@ -84,7 +83,6 @@ class TetrominoTest(unittest.TestCase):
         self.assertEqual(testing_tetromino.fall_down(gameboard_tested), False)
         testing_tetromino.current_y += 3
         self.assertEqual(testing_tetromino.fall_down(gameboard_tested), True)
-
 
     def test_will_collide(self):
         gameboard_tested = gameboard.Gameboard()
@@ -98,12 +96,6 @@ class TetrominoTest(unittest.TestCase):
         testing_tetromino.current_y += 2
         self.assertEqual(testing_tetromino.will_collide(gameboard_tested), True)
 
-
-
-
-        pass
-
-
     def test_calculate_buffor_drawing_coordinates(self):
         testing_tetromino = tetromino.Tetromino("I", times_rotated=0, x=5, y=0)
         x_to_test = testing_tetromino.current_x
@@ -113,6 +105,8 @@ class TetrominoTest(unittest.TestCase):
         y_to_draw_rect = (y_to_test * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
 
         self.assertEqual(testing_tetromino.calculate_buffor_drawing_coordinates(), (x_to_draw_rect, y_to_draw_rect))
+
+
 
 if __name__ == "__main__":
     unittest.main()

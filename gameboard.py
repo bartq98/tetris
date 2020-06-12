@@ -23,7 +23,6 @@ class Gameboard:
     def __init__(self):
         self.initialize_board()
 
-
     def initialize_board(self):
         """Set proper values of self.fields - 0 when buffer can move and -1 which are borders (undeletable)"""
 
@@ -38,7 +37,6 @@ class Gameboard:
         for i in range(0, config.BOARD_COLUMNS):
             self.fields[config.BOARD_ROWS-1][i] = config.BORDER_BLOCK
 
-
     def draw_single_block(self, screen, color, x_rect, y_rect):
         """Function responsible for drawing single block of gameboard"""
         pygame.draw.rect(
@@ -48,7 +46,6 @@ class Gameboard:
               config.GAME_BOARD_COORDS.top  + y_rect * config.BLOCK_SIZE,
               config.BLOCK_SIZE, config.BLOCK_SIZE)
         )
-
 
     def draw_gameboard(self, screen):
         """Drawing gameboard within screen"""
@@ -67,7 +64,6 @@ class Gameboard:
                 elif board_elem == config.FALLEN_BLOCK:
                     self.draw_single_block(screen, color_block, j, i)
 
-
     def add_blocks(self, tetromino):
         """Adding single blocks of fallen tetromino to self.fields => setting them o config.FALLEN_BLOCK"""
         y, x = tetromino.current_y, tetromino.current_x
@@ -76,7 +72,6 @@ class Gameboard:
             for j, elem in enumerate(row):
                 if tetromino.buffer[i][j] == config.BUFFER_BLOCK:
                     self.fields[y + i][x + j] = config.FALLEN_BLOCK
-
 
     def delete_lines(self):
         """Check if specified row is empty; if yes deletes it and moves all blocks down"""

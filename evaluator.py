@@ -15,6 +15,7 @@ class Evaluator():
 
     @staticmethod
     def simulate_falling(board: gameboard.Gameboard, buffer: tetromino.Tetromino):
+        """Returns new board as previous gameboard with added fallen buffer (both given as arguments)"""
         new_board  = copy.deepcopy(board)
         new_buffer = copy.deepcopy(buffer)
 
@@ -30,32 +31,29 @@ class Evaluator():
 
     @staticmethod
     def calculate(board: gameboard.Gameboard, buffer: tetromino.Tetromino):
+        """Calculates points to estimate how good/bad is specified case"""
         board_to_calculate = Evaluator.simulate_falling(board, buffer)
         
         if board_to_calculate is False:
             return False
 
-        columns_to_check = config.BOARD_COLUMNS-1
-        rows_to_check    = config.BOARD_ROWS-1
+        last_column_to_check = config.BOARD_COLUMNS-1
+        last_row_to_check    = config.BOARD_ROWS-1
         score = 0
 
-        for j in range(1, columns_to_check):
-            
+        for j in range(1, last_column_to_check):
             gaps_found = 0
             max_height = 0
-            
-            for i in range(0, rows_to_check): 
+            for i in range(0, last_row_to_check): 
                 # first met (going from top to bottom) block within specified column determites max_height
                 if max_height == 0 and board_to_calculate.fields[i][j] == config.FALLEN_BLOCK:
-                    max_height = 22 - i
+                    max_height = (config.BOARD_ROWS-1) - i
                 # for all above max_height every empty block is interpreted as unwanted gap
                 elif max_height != 0 and board_to_calculate.fields[i][j] == config.EMPTY_BLOCK:
                     gaps_found += 1
 
             score += (max_height*config.POINTS_HEIGHT) + (gaps_found*config.POINTS_GAP)
-            print(f"Kolumna {j} dała punktów {(max_height*config.POINTS_HEIGHT) + (gaps_found*config.POINTS_GAP)}")
-            
-        
+
         return score
 
     @staticmethod

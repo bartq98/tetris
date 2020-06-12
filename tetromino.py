@@ -29,8 +29,8 @@ class Tetromino:
             self.buffer = config.TETROMINO_SHAPES[type]
             for i in range(times_rotated):
                 self.buffer = self.rotate(self.buffer)
-        else:
-            # for invalid argument of tetromino
+        else: # for invalid argument of tetromino
+            # below - it clearly shows the error
             self.buffer = [
                 [1, 0, 0, 1],
                 [0, 0, 0, 0],
@@ -40,7 +40,7 @@ class Tetromino:
 
 
     def rotate(self, bufor, clockwise=True):
-        """Roates bufor clockwise"""
+        """Roates bufor clockwise or counterclockwise"""
         rotated_array = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -55,7 +55,8 @@ class Tetromino:
 
 
     def fall_down(self, board: gameboard.Gameboard):
-        """Moves buffer one block down"""
+        """Moves buffer one block down
+        and returns True when the block collides with previously fallen blocks"""
         self.current_y += 1
         if self.will_collide(board):
             self.current_y -= 1
@@ -88,7 +89,7 @@ class Tetromino:
 
 
     def will_collide(self, board: gameboard):
-        """Return True if buffer can move in specified direction, otherwise return False"""
+        """Return False if buffer can move in specified direction, otherwise return False"""
         for i, row in enumerate(self.buffer):
             for j, elem in enumerate(row):
                 if (self.buffer[j][i] == 1 and # if filled element within buffer...
@@ -98,6 +99,7 @@ class Tetromino:
 
 
     def calculate_buffor_drawing_coordinates(self):
+        """Calculates drawing coordinates necessarry while drawing single block"""
         rect_bufor_x = (self.current_x * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.left
         rect_bufor_y = (self.current_y * config.BLOCK_SIZE) + config.GAME_BOARD_COORDS.top
 
@@ -105,7 +107,7 @@ class Tetromino:
 
 
     def draw(self, screen):
-        """Draw 4 x 4 bufor with currently falling tetromino"""
+        """Draws 4 x 4 bufor of currently falling tetromino"""
 
         rect_bufor_x, rect_bufor_y = self.calculate_buffor_drawing_coordinates()
 

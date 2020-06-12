@@ -25,7 +25,7 @@ def game():
     pygame.init()
     screen = pre_configure_window()
 
-    buffer = tetromino.Tetromino("I", times_rotated=0, x=3, y=15)
+    buffer = tetromino.Tetromino("I", times_rotated=0, x=3, y=0)
     actuall_gameboard = gameboard.Gameboard()
 
     time_steps_done_before_fall = 0
@@ -48,7 +48,7 @@ def game():
             if has_falled:
                 actuall_gameboard.add_blocks(buffer)
                 buffer = evaluator.Evaluator.generate_tetromino(actuall_gameboard, 9)
-                if buffer.fall_down(actuall_gameboard): # while newly added tetromino instantly touching falled blocks
+                if buffer.fall_down(actuall_gameboard): # while newly added tetromino instantly touching fallen blocks
                     game_over = True
                     print(f"Thank You for your play - waiting to see u next time!")
                 actuall_gameboard.delete_lines()

@@ -1,8 +1,7 @@
 #!/bin/python3.8
 
 """
-    Tests of module tetromino
-
+    Tests of class Tetromino from module tetromino
 """
 
 import unittest
@@ -87,10 +86,21 @@ class TetrominoTest(unittest.TestCase):
         self.assertEqual(testing_tetromino.fall_down(gameboard_tested), True)
 
 
-    def test_move(self):
-        pass
-
     def test_will_collide(self):
+        gameboard_tested = gameboard.Gameboard()
+        # filling some of blocks [row][column]
+        gameboard_tested.fields[4][6] = config.FALLEN_BLOCK
+        gameboard_tested.fields[4][7] = config.FALLEN_BLOCK
+        gameboard_tested.fields[4][8] = config.FALLEN_BLOCK
+        testing_tetromino = tetromino.Tetromino("I", times_rotated=0, x=5, y=0)
+        self.assertEqual(testing_tetromino.will_collide(gameboard_tested), False)
+        # should intersects while fall one block down
+        testing_tetromino.current_y += 2
+        self.assertEqual(testing_tetromino.will_collide(gameboard_tested), True)
+
+
+
+
         pass
 
     def test_calculate_buffor_drawing_coordinates(self):

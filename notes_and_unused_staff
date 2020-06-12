@@ -43,3 +43,36 @@ Do testów:
     · 
 
  -> change to PyGame version delay() or
+
+ # # to test evaluator - will be deleted soon...
+# testing_board = gameboard.Gameboard()
+# testing_board.fields[21][1] = 2
+# testing_board.fields[21][2] = 2
+# testing_board.fields[21][3] = 2
+# testing_board.fields[21][4] = 2
+# testing_board.fields[21][5] = 2
+# testing_board.fields[21][6] = 2
+# testing_board.fields[20][1] = 2
+# testing_board.fields[20][2] = 2
+# testing_board.fields[20][3] = 2
+# testing_board.fields[0][9] = 2
+# test_teto = tetromino.Tetromino("I", times_rotated=2, x=3)
+
+# def pre_configure_window():
+#     """Configure whole stuff around game"""
+    
+#     pygame.display.set_caption("Tetris by Bartq98")
+#     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+#     screen.fill(config.Color.DARKRED.value)
+#     return screen
+
+# screen = pre_configure_window()
+# pygame.init()
+# score = Evaluator.calculate(testing_board, test_teto)
+# score2 = Evaluator.test_all_cases(testing_board)
+# test_teto = Evaluator.generate_tetromino(testing_board, 4)
+# print(test_teto.buffer)
+# print(score)
+# testing_board.draw_gameboard(screen)
+# pygame.display.update()
+# time.sleep(30)

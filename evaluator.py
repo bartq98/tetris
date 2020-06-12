@@ -92,41 +92,7 @@ class Evaluator():
 
         chosed_tetromino = most_unwanted_tetrominos[random_but_malice][0] #
         shape, rotate, x_shift = chosed_tetromino.split("-")
-        print(f"{shape}-{rotate}-{x_shift}")
+        # print(f"{shape}-{rotate}-{x_shift}")
         rotate = int(rotate)
         x_shift = int(x_shift)
-        return tetromino.Tetromino(shape, times_rotated=rotate, x=x_shift)
-
-
-# # to test evaluator - will be deleted soon...
-# testing_board = gameboard.Gameboard()
-# testing_board.fields[21][1] = 2
-# testing_board.fields[21][2] = 2
-# testing_board.fields[21][3] = 2
-# testing_board.fields[21][4] = 2
-# testing_board.fields[21][5] = 2
-# testing_board.fields[21][6] = 2
-# testing_board.fields[20][1] = 2
-# testing_board.fields[20][2] = 2
-# testing_board.fields[20][3] = 2
-# testing_board.fields[0][9] = 2
-# test_teto = tetromino.Tetromino("I", times_rotated=2, x=3)
-
-# def pre_configure_window():
-#     """Configure whole stuff around game"""
-    
-#     pygame.display.set_caption("Tetris by Bartq98")
-#     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
-#     screen.fill(config.Color.DARKRED.value)
-#     return screen
-
-# screen = pre_configure_window()
-# pygame.init()
-# score = Evaluator.calculate(testing_board, test_teto)
-# score2 = Evaluator.test_all_cases(testing_board)
-# test_teto = Evaluator.generate_tetromino(testing_board, 4)
-# print(test_teto.buffer)
-# print(score)
-# testing_board.draw_gameboard(screen)
-# pygame.display.update()
-# time.sleep(30)
+        return tetromino.Tetromino(shape, times_rotated=rotate, x=4)

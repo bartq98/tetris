@@ -5,6 +5,8 @@ import enum
 
 import pygame
 
+MALICIOUS_LEVEL = 9 # from 0 do 9
+
 # This file provides constans of game (windows size, colos within game, shape of tetrominos etc.)
 # You can simply set up to your own preference
 

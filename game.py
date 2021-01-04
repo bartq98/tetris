@@ -1,4 +1,4 @@
-#!/bin/python3.8
+#!/bin/env python
 "Simple Tetris-inspired game written with Python and PyGame"
 import random
 import time
